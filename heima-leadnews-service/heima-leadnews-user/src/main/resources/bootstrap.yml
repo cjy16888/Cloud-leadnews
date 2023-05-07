@@ -1,3 +1,4 @@
+# 当前的主机通过下面的端口，去和 nacos 服务中心进行通信
 server:
   port: 51801
 spring:
