@@ -36,13 +36,14 @@ public class ApUserServiceImpl extends ServiceImpl<ApUserMapper, ApUser> impleme
             //1.1 根据手机号查询用户信息
             //dto.getPhone()  等价于  select * from ap_user where phone = dto.getPhone()
             //ApUser::getPhone 获取的是 phone 字段，因为 @TableField(value = "phone")，所以是 phone 字段，而不是调用 getPhone() 方法
+            //使用的是 mybatis-plus 的 lambdaQuery() 方法，不需要写 sql 语句（xml文件）
             ApUser dbUser = getOne(Wrappers.<ApUser>lambdaQuery().eq(ApUser::getPhone, dto.getPhone()));
             if(dbUser == null){
                 return ResponseResult.errorResult(AppHttpCodeEnum.DATA_NOT_EXIST,"用户信息不存在");
             }
 
             //1.2 比对密码
-            String salt = dbUser.getSalt();
+            String salt = dbUser.getSalt(); //每一个用户都有一个盐值
             String password = dto.getPassword();
             String pswd = DigestUtils.md5DigestAsHex((password + salt).getBytes());
             if(!pswd.equals(dbUser.getPassword())){
@@ -53,6 +54,7 @@ public class ApUserServiceImpl extends ServiceImpl<ApUserMapper, ApUser> impleme
             String token = AppJwtUtil.getToken(dbUser.getId().longValue());
             Map<String,Object> map = new HashMap<>();
             map.put("token",token);
+            //为了安全起见，将密码和盐值设置为空，不返回给前端
             dbUser.setSalt("");
             dbUser.setPassword("");
             map.put("user",dbUser);
