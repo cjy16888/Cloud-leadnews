@@ -1,0 +1,18 @@
+server:
+  port: 51801
+spring:
+  application:
+    # 服务名称，nacos 服务中心上面的配置中的 DataID，要一致
+    name: leadnews-user
+  cloud:
+    nacos:
+      # 服务注册中心地址，部署在 linux
+      discovery:
+        server-addr: 192.168.23.133:8848
+      # 服务注册中心的命名空间，配置文件
+      # 比如 mysql 的配置文件，redis 的配置文件，都可以放在这里
+      config:
+        server-addr: 192.168.23.133:8848
+        file-extension: yml
+  profiles:
+    active: dev
