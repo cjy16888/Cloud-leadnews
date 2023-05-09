@@ -8,6 +8,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
@@ -52,10 +53,13 @@ public class AuthorizeFilter implements Ordered, GlobalFilter {
             //获取用户信息
             String userId = claimsBody.get("id").toString();
 
-            //// TODO: 2023/5/9 这里写的不一样，不清楚正确不
-            //存储到 header中
+            //存储到 header 中
             request.mutate().header("userId",userId);
             ServerHttpRequest serverHttpRequest = request.mutate().build();
+            //下面是老师的，两者都可以
+            //ServerHttpRequest serverHttpRequest =  request.mutate().header(httpHeaders -> {
+            //    httpHeaders.add("userId",userId);
+            //}).build();
 
             //为什么要重置请求，因为在网关中，请求是不可变的，所以要重新构建一个请求
             //同一个请求，不能重复使用，所以要重新构建一个请求转发到下一个过滤器（拦截器），然后访问真正的微服务
