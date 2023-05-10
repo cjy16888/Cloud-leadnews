@@ -22,6 +22,7 @@ public class ArticleApplication {
         SpringApplication.run(ArticleApplication.class,args);
     }
 
+    //分页插件 3.4.0版本后不需要配置该bean 会自动注入 但是需要配置分页插件的版本
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
