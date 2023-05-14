@@ -19,7 +19,7 @@ public class ArticleClient implements IArticleClient {
     @PostMapping("/api/v1/article/save")
     @Override
     public ResponseResult saveArticle(@RequestBody ArticleDto dto) {
-        System.err.println("远程调用保存文章，调用成功");
+        System.out.println("远程调用保存文章，调用成功");
         return apArticleService.saveArticle(dto);
     }
 }

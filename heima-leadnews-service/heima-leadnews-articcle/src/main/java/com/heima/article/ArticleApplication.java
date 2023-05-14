@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 @EnableDiscoveryClient
 @MapperScan("com.heima.article.mapper")
-@EnableAsync
+@EnableAsync //开启异步，生成页面ftl静态文件
 //开启feign，让当前项目可以调用其他服务，当前指定包下的微服务可以被其他微服务调用
 @EnableFeignClients(basePackages = "com.heima.apis")
 public class ArticleApplication {
