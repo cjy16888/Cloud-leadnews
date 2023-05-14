@@ -20,6 +20,7 @@ import com.heima.utils.thread.WmThreadLocalUtil;
 import com.heima.wemedia.mapper.WmMaterialMapper;
 import com.heima.wemedia.mapper.WmNewsMapper;
 import com.heima.wemedia.mapper.WmNewsMaterialMapper;
+import com.heima.wemedia.service.WmNewsAutoScanService;
 import com.heima.wemedia.service.WmNewsService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -93,9 +94,9 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
         return responseResult;
     }
 
-    //@Autowired
-    //private WmNewsAutoScanService wmNewsAutoScanService;
-    //
+    @Autowired
+    private WmNewsAutoScanService wmNewsAutoScanService;
+
     //@Autowired
     //private WmNewsTaskService wmNewsTaskService;
 
@@ -148,8 +149,8 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
         //保存封面图片与素材的关系
         saveRelativeInfoForCover(dto,wmNews,materials);
 
-        //审核文章
-//        wmNewsAutoScanService.autoScanWmNews(wmNews.getId());
+        //审核文章，调用自动审核的接口，异步调用，不需要返回值
+        wmNewsAutoScanService.autoScanWmNews(wmNews.getId());
 //        wmNewsTaskService.addNewsToTask(wmNews.getId(),wmNews.getPublishTime());
 
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);

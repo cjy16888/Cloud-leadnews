@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.heima.apis.article.IArticleClient;
 import com.heima.common.aliyun.GreenImageScan;
 import com.heima.common.aliyun.GreenTextScan;
+import com.heima.common.tess4j.Tess4jClient;
 import com.heima.file.service.FileStorageService;
 import com.heima.model.article.dtos.ArticleDto;
 import com.heima.model.common.dtos.ResponseResult;
@@ -22,6 +23,9 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -119,7 +123,6 @@ public class WmNewsAutoScanServiceImpl implements WmNewsAutoScanService {
         //调用app端的远程微服务的接口，保存文章
         ResponseResult responseResult = articleClient.saveArticle(dto);
         return responseResult;
-
     }
 
 
@@ -128,6 +131,9 @@ public class WmNewsAutoScanServiceImpl implements WmNewsAutoScanService {
 
     @Autowired
     private GreenImageScan greenImageScan;
+
+    @Autowired
+    private Tess4jClient tess4jClient;
 
     /**
      * 审核图片
@@ -150,9 +156,27 @@ public class WmNewsAutoScanServiceImpl implements WmNewsAutoScanService {
 
         List<byte[]> imageList = new ArrayList<>();
 
-        for (String image : images) {
-            byte[] bytes = fileStorageService.downLoadFile(image);
-            imageList.add(bytes);
+        //下载图片,对图片进行OCR识别，识别图片中的文字是否违规
+        try {
+            for (String image : images) {
+                byte[] bytes = fileStorageService.downLoadFile(image);
+
+                //调用OCR技术识别图片中的文字，进行过滤
+                ByteArrayInputStream in = new ByteArrayInputStream(bytes);
+                BufferedImage bufferedImage = ImageIO.read(in);
+                //识别图片中的文字
+                String text = tess4jClient.doOCR(bufferedImage);
+                boolean isSensitive = handleTextScan(text, wmNews);
+                if (!isSensitive) {
+                    flag = false;
+                    //updateWmNews(wmNews, (short) 2, "当前文章中存在违规内容");
+                    return flag;
+                }
+
+                imageList.add(bytes);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
 

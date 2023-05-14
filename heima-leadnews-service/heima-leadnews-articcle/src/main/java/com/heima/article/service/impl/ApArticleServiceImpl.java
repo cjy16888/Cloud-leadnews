@@ -91,11 +91,11 @@ public class ApArticleServiceImpl extends ServiceImpl<ApArticleMapper, ApArticle
     public ResponseResult saveArticle(ArticleDto dto) {
 
         //测试熔断，进行降级的处理，nacos上面设置的时间是2秒，这里设置3秒，触发熔断
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        //try {
+        //    Thread.sleep(3000);
+        //} catch (InterruptedException e) {
+        //    e.printStackTrace();
+        //}
 
         //1.检查参数
         if(dto == null){
