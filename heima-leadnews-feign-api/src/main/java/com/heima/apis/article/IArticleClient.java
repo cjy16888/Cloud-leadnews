@@ -1,14 +1,15 @@
 package com.heima.apis.article;
 
-import com.heima.apis.article.fallback.IArticleClientFallback;
 import com.heima.model.article.dtos.ArticleDto;
 import com.heima.model.common.dtos.ResponseResult;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 //这里的value是指定调用哪个服务
-@FeignClient(value = "leadnews-article",fallback = IArticleClientFallback.class)
+@FeignClient(value = "leadnews-article")
+@Component
 public interface IArticleClient {
 
     //这里的PostMapping是指定调用哪个服务的哪个接口
