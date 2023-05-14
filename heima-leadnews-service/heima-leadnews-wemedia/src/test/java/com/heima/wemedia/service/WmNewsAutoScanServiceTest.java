@@ -15,6 +15,6 @@ class WmNewsAutoScanServiceTest {
 
     @Test
     public void autoScanWmNews() {
-        wmNewsAutoScanService.autoScanWmNews(6232);
+        wmNewsAutoScanService.autoScanWmNews(6235);
     }
 }

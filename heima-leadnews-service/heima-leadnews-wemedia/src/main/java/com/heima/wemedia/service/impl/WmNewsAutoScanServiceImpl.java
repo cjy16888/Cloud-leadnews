@@ -91,8 +91,6 @@ public class WmNewsAutoScanServiceImpl implements WmNewsAutoScanService {
      */
     private ResponseResult saveAppArticle(WmNews wmNews) {
 
-        System.err.println("远程调用app端的接口，保存文章");
-
         ArticleDto dto = new ArticleDto();
         //属性的拷贝
         BeanUtils.copyProperties(wmNews,dto);
