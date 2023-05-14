@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @ControllerAdvice  //控制器增强类
 @Slf4j
 public class ExceptionCatch {
-
     /**
      * 处理不可控异常
      * @param e

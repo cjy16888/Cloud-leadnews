@@ -52,6 +52,7 @@ public class WmNews implements Serializable {
             0 无图文章
             1 单图文章
             3 多图文章
+            null 自动
      */
     @TableField("type")
     private Short type;

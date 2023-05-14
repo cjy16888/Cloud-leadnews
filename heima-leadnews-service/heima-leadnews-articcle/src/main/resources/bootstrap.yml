@@ -2,6 +2,7 @@ server:
   port: 51802
 spring:
   application:
+    # 微服务名称
     name: leadnews-article
   cloud:
     nacos:

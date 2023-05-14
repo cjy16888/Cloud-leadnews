@@ -25,6 +25,12 @@
             <groupId>com.heima</groupId>
             <artifactId>heima-leadnews-common</artifactId>
         </dependency>
+
+        <!--远程调用服务，openFeign-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
