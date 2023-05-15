@@ -1405,17 +1405,20 @@ public class CacheService extends CachingConfigurerSupport {
     
     /**
      * 管道技术，提高性能
-     * @param type
-     * @param values
+     * @param type task的类型
+     * @param values task对象的集合
      * @return
      */
+    //从右边批量插入
     public List<Object> lRightPushPipeline(String type,Collection<String> values){
+        //redisCallBack的作用是将redisConnection传入，然后进行操作
         List<Object> results = stringRedisTemplate.executePipelined(new RedisCallback<Object>() {
                     public Object doInRedis(RedisConnection connection) throws DataAccessException {
                         StringRedisConnection stringRedisConn = (StringRedisConnection)connection;
                         //集合转换数组
                         String[] strings = values.toArray(new String[values.size()]);
                         //直接批量发送
+                        //rPush到list中
                         stringRedisConn.rPush(type, strings);
                         return null;
                     }
@@ -1423,15 +1426,25 @@ public class CacheService extends CachingConfigurerSupport {
         return results;
     }
 
+    /**
+     * 管道技术，提高性能
+     * @param future_key zset的key，用来删除zset中数据的
+     * @param topic_key 准备将数据存放到 list 中的 key
+     * @param values task任务数据
+     * @return
+     */
     public List<Object> refreshWithPipeline(String future_key,String topic_key,Collection<String> values){
-
+        //redisCallBack的作用是将redisConnection传入，然后进行操作
         List<Object> objects = stringRedisTemplate.executePipelined(new RedisCallback<Object>() {
             @Nullable
             @Override
             public Object doInRedis(RedisConnection redisConnection) throws DataAccessException {
                 StringRedisConnection stringRedisConnection = (StringRedisConnection)redisConnection;
+                //将集合中的 task 数据转换为 数组
                 String[] strings = values.toArray(new String[values.size()]);
+                //因为语法是可以使用 数组 一次性添加多条数据的
                 stringRedisConnection.lPush(topic_key,strings);
+                //删除 zset 中的task数据
                 stringRedisConnection.zRem(future_key,strings);
                 return null;
             }
