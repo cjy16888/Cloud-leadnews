@@ -672,6 +672,7 @@ public class CacheService extends CachingConfigurerSupport {
      */
     public String lRightPop(String key) {
         //返回值是因为存入到 redis 的时候，value 是 task 对象的序列化的值 toJsonString
+        //pop之后，list中的值就没有了
         return stringRedisTemplate.opsForList().rightPop(key);
     }
 

@@ -22,6 +22,7 @@ import com.heima.wemedia.mapper.WmNewsMapper;
 import com.heima.wemedia.mapper.WmNewsMaterialMapper;
 import com.heima.wemedia.service.WmNewsAutoScanService;
 import com.heima.wemedia.service.WmNewsService;
+import com.heima.wemedia.service.WmNewsTaskService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -97,6 +98,9 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
     @Autowired
     private WmNewsAutoScanService wmNewsAutoScanService;
 
+    @Autowired
+    private WmNewsTaskService wmNewsTaskService;
+
     //@Autowired
     //private WmNewsTaskService wmNewsTaskService;
 
@@ -150,8 +154,9 @@ public class WmNewsServiceImpl extends ServiceImpl<WmNewsMapper, WmNews> impleme
         saveRelativeInfoForCover(dto,wmNews,materials);
 
         //审核文章，调用自动审核的接口，异步调用，不需要返回值
-        wmNewsAutoScanService.autoScanWmNews(wmNews.getId());
-//        wmNewsTaskService.addNewsToTask(wmNews.getId(),wmNews.getPublishTime());
+        //wmNewsAutoScanService.autoScanWmNews(wmNews.getId());
+        //这个和上面的区别是：下面这个添加了参数，什么时候发布文章，定时功能，什么时候审核文章
+        wmNewsTaskService.addNewsToTask(wmNews.getId(),wmNews.getPublishTime());
 
         return ResponseResult.okResult(AppHttpCodeEnum.SUCCESS);
 

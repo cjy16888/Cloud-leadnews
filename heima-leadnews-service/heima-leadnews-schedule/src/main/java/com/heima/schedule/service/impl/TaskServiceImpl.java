@@ -1,6 +1,7 @@
 package com.heima.schedule.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.heima.common.constants.ScheduleConstants;
 import com.heima.common.redis.CacheService;
 import com.heima.model.schedule.dtos.Task;
@@ -17,8 +18,10 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.PostConstruct;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -186,13 +189,12 @@ public class TaskServiceImpl implements TaskService {
             log.error("task cancel exception taskId={}", taskId);
         }
 
-
         return task;
     }
 
     /**
      * 按照类型和优先级拉取 list 中的任务
-     *
+     * 消费任务
      * @param type
      * @param priority
      * @return
@@ -258,10 +260,42 @@ public class TaskServiceImpl implements TaskService {
                 }
             }
         }
-
-
-
     }
 
+    /**
+     * 从数据库中同步数据到缓存
+     * 每5分钟执行一次
+     */
+    @Scheduled(cron = "0 */5 * * * ?")
+    @PostConstruct //项目启动的时候执行一次
+    public void reloadData() {
+        clearCache();
+        log.info("数据库数据同步到缓存");
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MINUTE, 5);
 
+        //查看小于未来5分钟的所有任务
+        List<Taskinfo> allTasks = taskinfoMapper.selectList(Wrappers.<Taskinfo>lambdaQuery().lt(Taskinfo::getExecuteTime,calendar.getTime()));
+        if(allTasks != null && allTasks.size() > 0){
+            for (Taskinfo taskinfo : allTasks) {
+                Task task = new Task();
+                BeanUtils.copyProperties(taskinfo,task);
+                task.setExecuteTime(taskinfo.getExecuteTime().getTime());
+                addTaskToCache(task);
+            }
+        }
+    }
+
+    /**
+     * 清空缓存
+     */
+    private void clearCache(){
+        // 删除缓存中未来数据集合和当前消费者队列的所有key，避免数据重复从数据库同步到缓存，数据库保存了所有的数据
+        Set<String> futurekeys = cacheService.scan(ScheduleConstants.FUTURE + "*");// future_
+        // 为什么删除 list 中key，list 中不是还有数据没有消费吗？因为 list 中的数据是从 zset 中同步过来的，所以 zset 中的数据是最新的
+        // 但是如果，list 中的数据还没有被消费，就被这里删除了，那不是就丢失了吗？不会，因为 是五分钟刷新一次，定时也是五分钟一次，所以不会丢失
+        Set<String> topickeys = cacheService.scan(ScheduleConstants.TOPIC + "*");// topic_
+        cacheService.delete(futurekeys);
+        cacheService.delete(topickeys);
+    }
 }
