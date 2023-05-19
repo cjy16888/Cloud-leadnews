@@ -27,7 +27,6 @@ public interface WmNewsService extends IService<WmNews> {
      * @param dto
      * @return
      */
-    //public ResponseResult downOrUp(WmNewsDto dto);
-
+    public ResponseResult downOrUp(WmNewsDto dto);
 
 }

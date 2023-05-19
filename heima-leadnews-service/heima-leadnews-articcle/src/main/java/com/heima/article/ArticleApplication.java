@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
+import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 
@@ -18,6 +19,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableAsync //开启异步，生成页面ftl静态文件
 //开启feign，让当前项目可以调用其他服务，当前指定包下的微服务可以被其他微服务调用
 @EnableFeignClients(basePackages = "com.heima.apis")
+@EnableKafka //开启kafka
 public class ArticleApplication {
 
     public static void main(String[] args) {
