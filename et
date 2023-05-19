@@ -1,0 +1,193 @@
+[33mcommit 54ff499363a06259d84852fa438eff11d6d66f48[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Fri May 19 17:36:56 2023 +0800
+
+    large file to push
+
+[33mcommit 2771709f4f86a6fe391b65e4851b6204c63399c4[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Fri May 19 17:29:52 2023 +0800
+
+    large file of logs to push
+
+[33mcommit a3e9087aada879c617a95dcf6cc69b5c468f303d[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Fri May 19 17:18:07 2023 +0800
+
+    large file of logs
+
+[33mcommit 16b1125fc581436c6fbb641f751784bd79eca7fc[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Fri May 19 17:12:05 2023 +0800
+
+    large file to push
+
+[33mcommit b226c9fdbe34e7c5b1accb79e2a1fddef5e1c698[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Fri May 19 17:04:26 2023 +0800
+
+    large file of logs
+
+[33mcommit b984d73e0a0908961146208e88aad97bb2e8639c[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Fri May 19 15:53:03 2023 +0800
+
+    集成 kafka ，文章上下架
+    wemedia自媒体设置文章的上下架，（可逆的，删除是不可逆的）
+    kafka通知到app端，进行文章的上下架
+
+[33mcommit de4d626ae1b97d29d0b2191a6941a0bd1883d625[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Fri May 19 15:49:40 2023 +0800
+
+    集成 kafka ，
+    wemedia自媒体设置文章的上下架，（可逆的，删除是不可逆的）
+    kafka通知到app端，进行文章的上下架
+
+[33mcommit b24a6f2c29126d22e6f009b358c6380c3c01670a[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Tue May 16 12:57:01 2023 +0800
+
+    将 数据库 中的 task 定时任务数据定时刷新到 redis 中，进行消费
+    添加延迟发布文章、审核文章的功能
+    使用 protostuff 进行二进制的序列化
+
+[33mcommit aaf0a134ec05e835c0d17c83e4ddcc5805a8bd24[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Tue May 16 00:02:20 2023 +0800
+
+    使用 redis 技术实现延迟（定时）任务，定时发布文章功能
+    使用了redisPipeline管道技术，优化从 zset 定时任务添加到 list 的待消费任务中的速度，6倍
+    使用 redis 的 scan 来优化 刷新定时任务的时候，查看有多少任务到时间发布了
+    使用 redis 的 setnx 实现分布式锁，避免造成多台服务器同时启动refresh刷新任务，浪费资源
+
+[33mcommit 9a67f24e38e032532bcc69bd0c46b0ddbe107395[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Mon May 15 23:49:36 2023 +0800
+
+    使用 redis 技术实现延迟（定时）任务，定时发布文章功能
+    使用了redispineple管道技术，优化从 zset 定时任务添加到 list 的待消费任务中的速度，6倍
+    使用 redis 的 scan 来优化 刷新定时任务的时候，查看有多少任务到时间发布了
+    使用 redis 的 setnx 实现分布式锁，避免造成多台服务器同时启动refresh刷新任务，浪费资源
+
+[33mcommit 6e71c451f5e7f9f7cf5ca1f428376db267e9a497[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Sun May 14 18:30:17 2023 +0800
+
+    实现了发布文章的时候，进行异步的生成 ftl 页面静态文件，freemarker
+
+[33mcommit 458e6d449097c7046edcc30ca47c2fe550483f51[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Sun May 14 18:10:00 2023 +0800
+
+    DFA 算法实现自定义敏感词过滤
+    OCR技术（tesseract）实现图片文字识别，进行审核
+
+[33mcommit 1a95e4b0f09741cc245337ce0579dfff9a9e442f[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Sun May 14 18:08:29 2023 +0800
+
+    DFA 算法实现自定义敏感词过滤
+    OCR技术（tesseract）实现图片文字识别，进行审核
+
+[33mcommit 03d3e7ae4b9e7c80f2ec732571e3e030e7dfeb5c[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Sun May 14 15:17:51 2023 +0800
+
+    feign远程调用服务的降级处理（熔断）
+
+[33mcommit 597857af517a00964f6b70dd412639263ec4d761[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Sun May 14 11:25:52 2023 +0800
+
+    vemedia 自媒体进行调用 ap_article 中的 feign 远程服务进行保存通过审核的文章到 app 端，供给用户浏览
+
+[33mcommit 207e7248e502f33cd53fe885d5d93e9143279405[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Sun May 14 10:05:48 2023 +0800
+
+    设置 app 端的文章的 保存的远程调用接口 FeignApi
+    以及接入 阿里云的内容安全检测的 api
+
+[33mcommit 34170446124c030d6f150a93f598254d0984c6ae[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Wed May 10 16:17:46 2023 +0800
+
+    解决上传图片太大失败问题
+    添加了图片素材查看功能
+    频道、new文章查看功能
+
+[33mcommit f7d5399eeb055aa6673dfecbbea26f1d7fc9eba9[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Wed May 10 16:17:04 2023 +0800
+
+    解决上传图片太大失败问题
+    添加了图片素材查看功能
+    频道、new文章查看功能
+
+[33mcommit a10799302dbfc57f56622ba144fbe60e28749624[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Wed May 10 00:09:52 2023 +0800
+
+    上传图片，（但是图片过大，超过 10 Mb 上传失败）
+
+[33mcommit 5f21e0550e9ae1330490bf847fc7a8a3efb689fc[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Tue May 9 22:27:21 2023 +0800
+
+    创建 wemedia 自媒体微服务（app的管理的后台），实现gateway的拦截校验token，以及将用户的信息存入到 threadlocal 中
+
+[33mcommit e2d004c235e1713169e9997ac730d369f1511a99[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Tue May 9 18:43:26 2023 +0800
+
+    freemarker模板引擎的使用，MinIO分布式文件系统的存储服务的测试
+
+[33mcommit 5601d028da2df41019cc804f8aae58b7c511be8e[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Mon May 8 20:59:10 2023 +0800
+
+    app端进行显示 article 文章列表
+
+[33mcommit b772cd428dc1748398aaca1cd8e0c46c57e38a67[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Sun May 7 22:36:50 2023 +0800
+
+    gateway网关进行校验
+
+[33mcommit 0cc81022781c23d6a984ad0ff78fe2769f17787e[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Sun May 7 21:15:08 2023 +0800
+
+    集成 knife4j （swagger的增强版）提供了离线文档
+
+[33mcommit 2fba5893ccb06dcc05c2dff081a0ad2504f5b8ce[m
+Merge: ef5460c 08aad26
+Author: cjy16888 <1458545629@qq.com>
+Date:   Sun May 7 18:33:43 2023 +0800
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit 08aad2698fbc87b2acb65f67d974cedf1b4511ff[m
+Author: MasterCJY <83013978+cjy16888@users.noreply.github.com>
+Date:   Sun May 7 18:14:48 2023 +0800
+
+    README.md
+
+[33mcommit ef5460c639b7328575122e9d6b4b30289ed7214e[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Sun May 7 18:12:06 2023 +0800
+
+    集成 Swagger
+
+[33mcommit 22f4573ff235473471bd0a56e296c3aecfb44516[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Sun May 7 16:49:25 2023 +0800
+
+    初始工程的基本搭建，正常运行
+
+[33mcommit cd0a4900b032b20822f579c1c66550a851307284[m
+Author: cjy16888 <1458545629@qq.com>
+Date:   Sun May 7 16:30:29 2023 +0800
+
+    初始项目的基本工程的搭建
