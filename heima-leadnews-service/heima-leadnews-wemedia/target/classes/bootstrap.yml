@@ -1,0 +1,17 @@
+server:
+  port: 51803
+spring:
+  application:
+    name: leadnews-wemedia
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.23.133:8848
+      config:
+        server-addr: 192.168.23.133:8848
+        file-extension: yml
+
+# OCR技术的文件路径
+tess4j:
+  data-path: D:\Hmtt\OCR
+  language: chi_sim

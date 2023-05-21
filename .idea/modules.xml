@@ -3,6 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/heima-leadnews-feign-api/heima-leadnews-feign-api.iml" filepath="$PROJECT_DIR$/heima-leadnews-feign-api/heima-leadnews-feign-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews-service/heima-leadnews-schedule/heima-leadnews-schedule.iml" filepath="$PROJECT_DIR$/heima-leadnews-service/heima-leadnews-schedule/heima-leadnews-schedule.iml" />
+      <module fileurl="file://$PROJECT_DIR$/heima-leadnews-test/kafka-demo/kafka-demo.iml" filepath="$PROJECT_DIR$/heima-leadnews-test/kafka-demo/kafka-demo.iml" />
     </modules>
   </component>
 </project>

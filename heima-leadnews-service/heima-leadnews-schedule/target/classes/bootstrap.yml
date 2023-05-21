@@ -1,0 +1,14 @@
+server:
+  port: 51701
+# 意思是：51701是默认的端口号。之后，如果有其他的端口号，开启多台服务器，可以再启动的时候，通过命令行参数，指定端口号。
+#  port: ${server.port:51701}
+spring:
+  application:
+    name: leadnews-schedule
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.23.133:8848
+      config:
+        server-addr: 192.168.23.133:8848
+        file-extension: yml
