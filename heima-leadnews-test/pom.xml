@@ -16,6 +16,7 @@
         <module>minio-demo</module>
         <module>kafka-demo</module>
         <module>es-init</module>
+        <module>mongo-demo</module>
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
