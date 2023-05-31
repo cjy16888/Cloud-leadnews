@@ -17,7 +17,8 @@ public class ConfusionSerializerModifier extends BeanSerializerModifier {
         List<BeanPropertyWriter> newWriter = new ArrayList<>();
         for(BeanPropertyWriter writer : beanProperties){
             String name = writer.getType().getTypeName();
-
+            //如果属性名是id，或者属性上有IdEncrypt注解，就进行加密
+            //也就是进行序列化，转化为 string 对象，避免精度的丢失
             if(null == writer.getAnnotation(IdEncrypt.class) && !writer.getName().equalsIgnoreCase("id")){
                 newWriter.add(writer);
             } else {
