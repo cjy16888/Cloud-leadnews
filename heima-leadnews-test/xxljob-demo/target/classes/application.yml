@@ -1,0 +1,14 @@
+server:
+  port: ${port:8881}
+
+
+xxl:
+  job:
+    admin:
+      # 任务调度中心地址
+      addresses: http://192.168.23.133:8888/xxl-job-admin
+    executor:
+      # 执行器通讯TOKEN [选填]：非空时启用；，名称需要与调度中心一致
+      appname: xxl-job-executor-sample
+      # 执行器的端口号，注意不能与调度中心其他的端口号冲突
+      port: ${executor.port:9999}

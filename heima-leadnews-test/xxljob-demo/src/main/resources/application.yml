@@ -1,0 +1,18 @@
+server:
+  # 服务端口号
+  # 下面是为了启动多台服务
+  # 比如 -Dport=8882, 就是启动同一个配置文件，但是端口号不一样，相当于就是集群了
+  port: ${port:8881}
+
+
+xxl:
+  job:
+    admin:
+      # 任务调度中心地址
+      addresses: http://192.168.23.133:8888/xxl-job-admin
+    executor:
+      # 执行器通讯TOKEN [选填]：非空时启用；，名称需要与调度中心一致
+      appname: xxl-job-executor-sample
+      # 执行器的端口号，注意不能与调度中心其他的端口号冲突
+      # 通过 ——Dexecutor。port=9998 来启动多个执行器
+      port: ${executor.port:9999}

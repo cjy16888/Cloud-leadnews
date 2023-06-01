@@ -27,8 +27,9 @@ public class ArticleHomeController {
      */
     @PostMapping("/load")
     public ResponseResult load(@RequestBody ArticleHomeDto dto){
-        return apArticleService.load(dto, ArticleConstants.LOADTYPE_LOAD_MORE);
-//        return apArticleService.load2(dto, ArticleConstants.LOADTYPE_LOAD_MORE,true);
+        //return apArticleService.load(dto, ArticleConstants.LOADTYPE_LOAD_MORE);
+        //首页的话，需要加载缓存中的数据（热点文章）
+        return apArticleService.load2(dto, ArticleConstants.LOADTYPE_LOAD_MORE,true);
     }
 
     /**

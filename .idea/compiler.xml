@@ -17,6 +17,7 @@
         <module name="heima-leadnews-feign-api" />
         <module name="heima-leadnews-user" />
         <module name="kafka-demo" />
+        <module name="xxljob-demo" />
         <module name="es-init" />
         <module name="heima-leadnews-schedule" />
         <module name="heima-leadnews-utils" />
@@ -56,6 +57,7 @@
       <module name="kafka-demo" options="-parameters" />
       <module name="minio-demo" options="-parameters" />
       <module name="mongo-demo" options="-parameters" />
+      <module name="xxljob-demo" options="-parameters" />
     </option>
   </component>
 </project>
