@@ -22,7 +22,7 @@ public class KafkaStreamQuickStart {
 
         //kafka的配置信心
         Properties prop = new Properties();
-        prop.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG,"192.168.200.130:9092");
+        prop.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG,"192.168.23.133:9092");
         prop.put(StreamsConfig.DEFAULT_KEY_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         prop.put(StreamsConfig.DEFAULT_VALUE_SERDE_CLASS_CONFIG, Serdes.String().getClass());
         prop.put(StreamsConfig.APPLICATION_ID_CONFIG,"streams-quickstart");
@@ -33,7 +33,6 @@ public class KafkaStreamQuickStart {
         //流式计算
         streamProcessor(streamsBuilder);
 
-
         //创建kafkaStream对象
         KafkaStreams kafkaStreams = new KafkaStreams(streamsBuilder.build(),prop);
         //开启流式计算
@@ -42,7 +41,6 @@ public class KafkaStreamQuickStart {
 
     /**
      * 流式计算
-     *
      * 消息的内容 hello kafka
      *
      * @param streamsBuilder
@@ -50,6 +48,7 @@ public class KafkaStreamQuickStart {
     private static void streamProcessor(StreamsBuilder streamsBuilder) {
         //创建kstream对象，同时指定从那个topic中接收消息
         KStream<String, String> stream = streamsBuilder.stream("itcast-topic-input");
+        //对消息进行处理，flatMapValues  将value进行切割
         stream.flatMapValues(new ValueMapper<String, Iterable<String>>() {
             @Override
             public Iterable<String> apply(String value) {
@@ -58,7 +57,7 @@ public class KafkaStreamQuickStart {
         })
                 //根据value进行聚合分组
                 .groupBy((key,value)->value)
-                //聚合计算时间间隔
+                //聚合计算时间间隔，每10秒钟计算一次
                 .windowedBy(TimeWindows.of(Duration.ofSeconds(10)))
                 //求单词的个数
                 .count()

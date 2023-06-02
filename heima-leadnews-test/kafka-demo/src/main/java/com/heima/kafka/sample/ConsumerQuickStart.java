@@ -19,7 +19,7 @@ public class ConsumerQuickStart {
         //1.kafka的配置信息
         Properties prop = new Properties();
         //链接地址
-        prop.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.200.130:9092");
+        prop.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.23.133:9092");
         //key和value的反序列化器
         prop.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
         prop.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");

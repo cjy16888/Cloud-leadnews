@@ -14,10 +14,10 @@ public class ProducerQuickStart {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
-        //1.kafka链接配置信息
+        //1.kafka链接配置信息（已经配置好了 kafkaStream的流式计算）
         Properties prop = new Properties();
         //kafka链接地址
-        prop.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"192.168.200.130:9092");
+        prop.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,"192.168.23.133:9092");
         //key和value的序列化
         prop.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringSerializer");
         prop.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,"org.apache.kafka.common.serialization.StringSerializer");
