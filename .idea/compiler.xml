@@ -7,26 +7,26 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="heima-file-starter" />
+        <module name="coder-leadnews-feign-api" />
         <module name="freemarker-demo" />
+        <module name="coder-leadnews-common" />
         <module name="minio-demo" />
-        <module name="heima-leadnews-wemedia-gateway" />
         <module name="heima-leadnews-feign-api (1)" />
-        <module name="heima-leadnews-articcle" />
-        <module name="heima-leadnews-wemedia" />
-        <module name="heima-leadnews-behavior" />
-        <module name="heima-leadnews-feign-api" />
-        <module name="heima-leadnews-user" />
+        <module name="coder-leadnews-behavior" />
+        <module name="coder-leadnews-user" />
+        <module name="coder-leadnews-search" />
+        <module name="coder-leadnews-utils" />
         <module name="kafka-demo" />
+        <module name="coder-leadnews-articcle" />
         <module name="xxljob-demo" />
+        <module name="coder-leadnews-schedule" />
         <module name="es-init" />
-        <module name="heima-leadnews-schedule" />
-        <module name="heima-leadnews-utils" />
-        <module name="heima-leadnews-app-gateway" />
-        <module name="heima-leadnews-search" />
-        <module name="heima-leadnews-common" />
+        <module name="coder-leadnews-app-gateway" />
+        <module name="coder-leadnews-wemedia" />
+        <module name="coder-leadnews-model" />
+        <module name="coder-leadnews-wemedia-gateway" />
         <module name="mongo-demo" />
-        <module name="heima-leadnews-model" />
+        <module name="coder-file-starter" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -35,27 +35,27 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="coder-file-starter" options="-parameters" />
+      <module name="coder-leadnews" options="-parameters" />
+      <module name="coder-leadnews-app-gateway" options="-parameters" />
+      <module name="coder-leadnews-articcle" options="-parameters" />
+      <module name="coder-leadnews-basic" options="-parameters" />
+      <module name="coder-leadnews-behavior" options="-parameters" />
+      <module name="coder-leadnews-common" options="-parameters" />
+      <module name="coder-leadnews-feign-api" options="-parameters" />
+      <module name="coder-leadnews-gateway" options="-parameters" />
+      <module name="coder-leadnews-model" options="-parameters" />
+      <module name="coder-leadnews-schedule" options="-parameters" />
+      <module name="coder-leadnews-search" options="-parameters" />
+      <module name="coder-leadnews-service" options="-parameters" />
+      <module name="coder-leadnews-test" options="-parameters" />
+      <module name="coder-leadnews-user" options="-parameters" />
+      <module name="coder-leadnews-utils" options="-parameters" />
+      <module name="coder-leadnews-wemedia" options="-parameters" />
+      <module name="coder-leadnews-wemedia-gateway" options="-parameters" />
       <module name="es-init" options="-parameters" />
       <module name="freemarker-demo" options="-parameters" />
-      <module name="heima-file-starter" options="-parameters" />
-      <module name="heima-leadnews" options="-parameters" />
       <module name="heima-leadnews-apis" options="-parameters" />
-      <module name="heima-leadnews-app-gateway" options="-parameters" />
-      <module name="heima-leadnews-articcle" options="-parameters" />
-      <module name="heima-leadnews-basic" options="-parameters" />
-      <module name="heima-leadnews-behavior" options="-parameters" />
-      <module name="heima-leadnews-common" options="-parameters" />
-      <module name="heima-leadnews-feign-api" options="-parameters" />
-      <module name="heima-leadnews-gateway" options="-parameters" />
-      <module name="heima-leadnews-model" options="-parameters" />
-      <module name="heima-leadnews-schedule" options="-parameters" />
-      <module name="heima-leadnews-search" options="-parameters" />
-      <module name="heima-leadnews-service" options="-parameters" />
-      <module name="heima-leadnews-test" options="-parameters" />
-      <module name="heima-leadnews-user" options="-parameters" />
-      <module name="heima-leadnews-utils" options="-parameters" />
-      <module name="heima-leadnews-wemedia" options="-parameters" />
-      <module name="heima-leadnews-wemedia-gateway" options="-parameters" />
       <module name="kafka-demo" options="-parameters" />
       <module name="minio-demo" options="-parameters" />
       <module name="mongo-demo" options="-parameters" />

@@ -1,0 +1,17 @@
+server:
+  port: 51802
+spring:
+  application:
+    # 微服务名称
+    name: leadnews-article
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.23.133:8848
+      config:
+        server-addr: 192.168.23.133:8848
+        file-extension: yml
+
+kafka:
+  hosts: 192.168.23.133:9092
+  group: ${spring.application.name}
